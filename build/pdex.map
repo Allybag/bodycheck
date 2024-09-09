@@ -1,0 +1,614 @@
+Archive member included to satisfy reference by file (symbol)
+
+/usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-aeabi_memclr.o)
+                              build/game_device.o (__aeabi_memclr)
+/usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-aeabi_memset-soft.o)
+                              /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-aeabi_memclr.o) (__aeabi_memset)
+/usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-malloc.o)
+                              build/game_device.o (malloc)
+/usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-rand.o)
+                              build/game_device.o (srand)
+/usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-impure.o)
+                              /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-malloc.o) (_impure_ptr)
+
+Discarded input sections
+
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .text          0x0000000000000000        0x0 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .data          0x0000000000000000        0x0 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .bss           0x0000000000000000        0x0 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .group         0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .text          0x0000000000000000        0x0 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .data          0x0000000000000000        0x0 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .bss           0x0000000000000000        0x0 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .text._malloc_r
+                0x0000000000000000        0xc build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .text._realloc_r
+                0x0000000000000000       0x10 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .text._free_r  0x0000000000000000       0x14 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000      0xaa8 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000       0x22 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000       0x8e build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000       0x51 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000       0xef build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000       0x6a build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000      0x1df build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000       0x18 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000       0x5e build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000       0x35 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000       0x34 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000       0x16 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000      0x10e build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000       0x8d build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000       0x58 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000       0x1f build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000       0x43 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000       0x20 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000      0x18e build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000      0x339 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000       0x16 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000       0x29 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000       0x28 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000       0x58 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000       0x16 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000       0x35 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000       0x1c build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000       0x22 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_macro   0x0000000000000000      0x1e1 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .text          0x0000000000000000        0x0 build/game_device.o
+ .text.swift_beginAccess
+                0x0000000000000000        0x2 build/game_device.o
+ .ARM.exidx.text.swift_beginAccess
+                0x0000000000000000        0x8 build/game_device.o
+ .text.$s11game_device12eventHandler7pointer0C03args5Int32VSvSg_So13PDSystemEventas6UInt32VtF
+                0x0000000000000000       0x30 build/game_device.o
+ .ARM.exidx.text.$s11game_device12eventHandler7pointer0C03args5Int32VSvSg_So13PDSystemEventas6UInt32VtF
+                0x0000000000000000        0x8 build/game_device.o
+ .text.swift_once
+                0x0000000000000000       0x5e build/game_device.o
+ .ARM.exidx.text.swift_once
+                0x0000000000000000        0x8 build/game_device.o
+ .text.swift_allocObject
+                0x0000000000000000       0x44 build/game_device.o
+ .ARM.exidx.text.swift_allocObject
+                0x0000000000000000        0x8 build/game_device.o
+ .text.$s15playdate_device14posix_memalignys5Int32VSpySvSgG_S2itF
+                0x0000000000000000       0x46 build/game_device.o
+ .ARM.exidx.text.$s15playdate_device14posix_memalignys5Int32VSpySvSgG_S2itF
+                0x0000000000000000        0x8 build/game_device.o
+ .text._swift_embedded_set_heap_object_metadata_pointer
+                0x0000000000000000        0x4 build/game_device.o
+ .ARM.exidx.text._swift_embedded_set_heap_object_metadata_pointer
+                0x0000000000000000        0x8 build/game_device.o
+ .text.swift_initStackObject
+                0x0000000000000000       0x1a build/game_device.o
+ .ARM.exidx.text.swift_initStackObject
+                0x0000000000000000        0x8 build/game_device.o
+ .text.swift_initStaticObject
+                0x0000000000000000       0x18 build/game_device.o
+ .ARM.exidx.text.swift_initStaticObject
+                0x0000000000000000        0x8 build/game_device.o
+ .text.swift_deallocObject
+                0x0000000000000000        0x4 build/game_device.o
+ .ARM.exidx.text.swift_deallocObject
+                0x0000000000000000        0x8 build/game_device.o
+ .text.swift_deallocClassInstance
+                0x0000000000000000        0xc build/game_device.o
+ .ARM.exidx.text.swift_deallocClassInstance
+                0x0000000000000000        0x8 build/game_device.o
+ .text.swift_deallocPartialClassInstance
+                0x0000000000000000       0x2e build/game_device.o
+ .ARM.exidx.text.swift_deallocPartialClassInstance
+                0x0000000000000000        0x8 build/game_device.o
+ .text._swift_embedded_get_heap_object_metadata_pointer
+                0x0000000000000000        0x4 build/game_device.o
+ .ARM.exidx.text._swift_embedded_get_heap_object_metadata_pointer
+                0x0000000000000000        0x8 build/game_device.o
+ .text._swift_embedded_invoke_heap_object_optional_ivardestroyer
+                0x0000000000000000       0x16 build/game_device.o
+ .ARM.exidx.text._swift_embedded_invoke_heap_object_optional_ivardestroyer
+                0x0000000000000000        0x8 build/game_device.o
+ .text.swift_slowAlloc
+                0x0000000000000000       0x2e build/game_device.o
+ .ARM.exidx.text.swift_slowAlloc
+                0x0000000000000000        0x8 build/game_device.o
+ .text.swift_slowDealloc
+                0x0000000000000000        0x4 build/game_device.o
+ .ARM.exidx.text.swift_slowDealloc
+                0x0000000000000000        0x8 build/game_device.o
+ .text.swift_willThrow
+                0x0000000000000000        0x2 build/game_device.o
+ .ARM.exidx.text.swift_willThrow
+                0x0000000000000000        0x8 build/game_device.o
+ .text.swift_errorInMain
+                0x0000000000000000        0x2 build/game_device.o
+ .ARM.exidx.text.swift_errorInMain
+                0x0000000000000000        0x8 build/game_device.o
+ .text.swift_unexpectedError
+                0x0000000000000000        0xa build/game_device.o
+ .ARM.exidx.text.swift_unexpectedError
+                0x0000000000000000        0x8 build/game_device.o
+ .text.swift_release
+                0x0000000000000000        0x4 build/game_device.o
+ .ARM.exidx.text.swift_release
+                0x0000000000000000        0x8 build/game_device.o
+ .text.$ss13swift_release6objectyBp_tF
+                0x0000000000000000       0x4c build/game_device.o
+ .ARM.exidx.text.$ss13swift_release6objectyBp_tF
+                0x0000000000000000        0x8 build/game_device.o
+ .text.swift_retain_n
+                0x0000000000000000        0x4 build/game_device.o
+ .ARM.exidx.text.swift_retain_n
+                0x0000000000000000        0x8 build/game_device.o
+ .text.swift_release_n
+                0x0000000000000000        0x4 build/game_device.o
+ .ARM.exidx.text.swift_release_n
+                0x0000000000000000        0x8 build/game_device.o
+ .text.$ss15swift_release_n6object1nyBp_s6UInt32VtF
+                0x0000000000000000       0x56 build/game_device.o
+ .ARM.exidx.text.$ss15swift_release_n6object1nyBp_s6UInt32VtF
+                0x0000000000000000        0x8 build/game_device.o
+ .text.swift_setDeallocating
+                0x0000000000000000        0x2 build/game_device.o
+ .ARM.exidx.text.swift_setDeallocating
+                0x0000000000000000        0x8 build/game_device.o
+ .text.swift_bridgeObjectRetain_n
+                0x0000000000000000        0x4 build/game_device.o
+ .ARM.exidx.text.swift_bridgeObjectRetain_n
+                0x0000000000000000        0x8 build/game_device.o
+ .text.swift_retain_nTm
+                0x0000000000000000       0x26 build/game_device.o
+ .ARM.exidx.text.swift_retain_nTm
+                0x0000000000000000        0x8 build/game_device.o
+ .text.swift_bridgeObjectRelease_n
+                0x0000000000000000        0x4 build/game_device.o
+ .ARM.exidx.text.swift_bridgeObjectRelease_n
+                0x0000000000000000        0x8 build/game_device.o
+ .text.swift_bridgeObjectRetain
+                0x0000000000000000       0x1e build/game_device.o
+ .ARM.exidx.text.swift_bridgeObjectRetain
+                0x0000000000000000        0x8 build/game_device.o
+ .text.swift_bridgeObjectRelease
+                0x0000000000000000        0x4 build/game_device.o
+ .ARM.exidx.text.swift_bridgeObjectRelease
+                0x0000000000000000        0x8 build/game_device.o
+ .text.swift_isUniquelyReferenced_native
+                0x0000000000000000       0x16 build/game_device.o
+ .ARM.exidx.text.swift_isUniquelyReferenced_native
+                0x0000000000000000        0x8 build/game_device.o
+ .text.swift_isUniquelyReferenced_nonNull_native
+                0x0000000000000000       0x10 build/game_device.o
+ .ARM.exidx.text.swift_isUniquelyReferenced_nonNull_native
+                0x0000000000000000        0x8 build/game_device.o
+ .text.swift_dynamicCastClass
+                0x0000000000000000       0x34 build/game_device.o
+ .ARM.exidx.text.swift_dynamicCastClass
+                0x0000000000000000        0x8 build/game_device.o
+ .text.swift_endAccess
+                0x0000000000000000        0x2 build/game_device.o
+ .ARM.exidx.text.swift_endAccess
+                0x0000000000000000        0x8 build/game_device.o
+ .text.swift_deletedMethodError
+                0x0000000000000000        0x2 build/game_device.o
+ .ARM.exidx.text.swift_deletedMethodError
+                0x0000000000000000        0x8 build/game_device.o
+ .text.swift_clearSensitive
+                0x0000000000000000        0x4 build/game_device.o
+ .ARM.exidx.text.swift_clearSensitive
+                0x0000000000000000        0x8 build/game_device.o
+ .text.$ss20swift_clearSensitive3buf6nbytesySv_SitF
+                0x0000000000000000       0x14 build/game_device.o
+ .ARM.exidx.text.$ss20swift_clearSensitive3buf6nbytesySv_SitF
+                0x0000000000000000        0x8 build/game_device.o
+ .text.$ss25swift_bridgeObjectRelease6objectyBp_tF
+                0x0000000000000000        0x4 build/game_device.o
+ .ARM.exidx.text.$ss25swift_bridgeObjectRelease6objectyBp_tF
+                0x0000000000000000        0x8 build/game_device.o
+ .text.$ss27swift_bridgeObjectRelease_n6object1nyBp_s6UInt32VtF
+                0x0000000000000000        0x4 build/game_device.o
+ .ARM.exidx.text.$ss27swift_bridgeObjectRelease_n6object1nyBp_s6UInt32VtF
+                0x0000000000000000        0x8 build/game_device.o
+ .text.swift_retain
+                0x0000000000000000        0x4 build/game_device.o
+ .ARM.exidx.text.swift_retain
+                0x0000000000000000        0x8 build/game_device.o
+ .swift_modhash
+                0x0000000000000000       0x10 build/game_device.o
+ .swift1_autolink_entries
+                0x0000000000000000        0x0 build/game_device.o
+ .linker-options
+                0x0000000000000000        0x0 build/game_device.o
+ .text          0x0000000000000000        0x0 /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-aeabi_memclr.o)
+ .data          0x0000000000000000        0x0 /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-aeabi_memclr.o)
+ .bss           0x0000000000000000        0x0 /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-aeabi_memclr.o)
+ .text.__aeabi_memclr
+                0x0000000000000000        0x8 /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-aeabi_memclr.o)
+ .debug_frame   0x0000000000000000       0x20 /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-aeabi_memclr.o)
+ .ARM.attributes
+                0x0000000000000000       0x34 /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-aeabi_memclr.o)
+ .text          0x0000000000000000       0x9a /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-aeabi_memset-soft.o)
+ .data          0x0000000000000000        0x0 /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-aeabi_memset-soft.o)
+ .bss           0x0000000000000000        0x0 /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-aeabi_memset-soft.o)
+ .ARM.attributes
+                0x0000000000000000       0x1c /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-aeabi_memset-soft.o)
+ .text          0x0000000000000000        0x0 /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-malloc.o)
+ .data          0x0000000000000000        0x0 /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-malloc.o)
+ .bss           0x0000000000000000        0x0 /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-malloc.o)
+ .text.malloc   0x0000000000000000       0x10 /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-malloc.o)
+ .text.free     0x0000000000000000       0x10 /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-malloc.o)
+ .debug_frame   0x0000000000000000       0x30 /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-malloc.o)
+ .ARM.attributes
+                0x0000000000000000       0x34 /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-malloc.o)
+ .text          0x0000000000000000        0x0 /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-rand.o)
+ .data          0x0000000000000000        0x0 /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-rand.o)
+ .bss           0x0000000000000000        0x0 /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-rand.o)
+ .text.rand     0x0000000000000000       0x3c /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-rand.o)
+ .text          0x0000000000000000        0x0 /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-impure.o)
+ .data          0x0000000000000000        0x0 /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-impure.o)
+ .bss           0x0000000000000000        0x0 /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-impure.o)
+ .rodata._global_impure_ptr
+                0x0000000000000000        0x4 /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-impure.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+LOAD build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+LOAD build/game_device.o
+START GROUP
+LOAD /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/libgcc.a
+LOAD /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a
+LOAD /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a
+END GROUP
+START GROUP
+LOAD /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/thumb/v7e-m+fp/hard/libgcc.a
+LOAD /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc.a
+LOAD /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libm.a
+END GROUP
+
+.text           0x0000000000000000       0xf8
+ *(.text)
+ *(.text.*)
+ .text.eventHandlerShim
+                0x0000000000000000       0x1c build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+                0x0000000000000000                eventHandlerShim
+ .text.$s11game_device0A0_WZ
+                0x000000000000001c       0x30 build/game_device.o
+                0x000000000000001c                $s11game_device0A0_WZ
+ .text.eventHandler
+                0x000000000000004c       0x30 build/game_device.o
+                0x000000000000004c                eventHandler
+ .text.$s11game_device12eventHandler7pointer0C03args5Int32VSvSg_So13PDSystemEventas6UInt32VtFAgHcfU_To
+                0x000000000000007c       0x6c build/game_device.o
+                0x000000000000007c                $s11game_device12eventHandler7pointer0C03args5Int32VSvSg_So13PDSystemEventas6UInt32VtFAgHcfU_To
+ .text.srand    0x00000000000000e8       0x10 /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-rand.o)
+                0x00000000000000e8                srand
+ *(.init)
+ *(.fini)
+ *crtbegin.o(.ctors)
+ *crtbegin?.o(.ctors)
+ *(EXCLUDE_FILE(*crtend.o *crtend?.o) .ctors)
+ *(SORT_BY_NAME(.ctors.*))
+ *(.ctors)
+ *crtbegin.o(.dtors)
+ *crtbegin?.o(.dtors)
+ *(EXCLUDE_FILE(*crtend.o *crtend?.o) .dtors)
+ *(SORT_BY_NAME(.dtors.*))
+ *(.dtors)
+ *(.rodata*)
+ *(.eh_frame*)
+
+.glue_7         0x00000000000000f8        0x0
+ .glue_7        0x00000000000000f8        0x0 linker stubs
+
+.glue_7t        0x00000000000000f8        0x0
+ .glue_7t       0x00000000000000f8        0x0 linker stubs
+
+.vfp11_veneer   0x00000000000000f8        0x0
+ .vfp11_veneer  0x00000000000000f8        0x0 linker stubs
+
+.v4_bx          0x00000000000000f8        0x0
+ .v4_bx         0x00000000000000f8        0x0 linker stubs
+
+.iplt           0x00000000000000f8        0x0
+ .iplt          0x00000000000000f8        0x0 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+
+.rel.dyn        0x00000000000000f8        0x0
+ .rel.iplt      0x00000000000000f8        0x0 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .rel.got       0x00000000000000f8        0x0 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+
+.ARM.exidx.text.$s11game_device0A0_WZ
+                0x00000000000000f8        0x8
+ .ARM.exidx.text.$s11game_device0A0_WZ
+                0x00000000000000f8        0x8 build/game_device.o
+
+.ARM.exidx.text.eventHandler
+                0x0000000000000100        0x0
+ .ARM.exidx.text.eventHandler
+                0x0000000000000100        0x0 build/game_device.o
+                                          0x8 (size before relaxing)
+
+.ARM.exidx.text.$s11game_device12eventHandler7pointer0C03args5Int32VSvSg_So13PDSystemEventas6UInt32VtFAgHcfU_To
+                0x0000000000000100        0x0
+ .ARM.exidx.text.$s11game_device12eventHandler7pointer0C03args5Int32VSvSg_So13PDSystemEventas6UInt32VtFAgHcfU_To
+                0x0000000000000100        0x0 build/game_device.o
+                                          0x8 (size before relaxing)
+
+.data           0x0000000000000100      0x430
+                0x0000000000000100                __etext = .
+                0x0000000000000100                __data_start__ = .
+ *(vtable)
+ *(.data*)
+ .data._impure_ptr
+                0x0000000000000100        0x4 /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-impure.o)
+                0x0000000000000100                _impure_ptr
+ *fill*         0x0000000000000104        0x4 
+ .data.impure_data
+                0x0000000000000108      0x428 /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-impure.o)
+                0x0000000000000530                . = ALIGN (0x4)
+                [!provide]                        PROVIDE (__preinit_array_start = .)
+ *(.preinit_array)
+                [!provide]                        PROVIDE (__preinit_array_end = .)
+                0x0000000000000530                . = ALIGN (0x4)
+                [!provide]                        PROVIDE (__init_array_start = .)
+ *(SORT_BY_NAME(.init_array.*))
+ *(.init_array)
+                [!provide]                        PROVIDE (__init_array_end = .)
+                0x0000000000000530                . = ALIGN (0x4)
+                [!provide]                        PROVIDE (__fini_array_start = .)
+ *(SORT_BY_NAME(.fini_array.*))
+ *(.fini_array)
+                [!provide]                        PROVIDE (__fini_array_end = .)
+                0x0000000000000530                . = ALIGN (0x4)
+                0x0000000000000530                __data_end__ = .
+
+.igot.plt       0x0000000000000530        0x0
+ .igot.plt      0x0000000000000530        0x0 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+
+.got            0x0000000000000530        0x4
+ .got           0x0000000000000530        0x4 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+
+.got.plt        0x0000000000000534        0xc
+ .got.plt       0x0000000000000534        0xc build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+                0x0000000000000534                _GLOBAL_OFFSET_TABLE_
+
+.bss            0x0000000000000540        0xc
+                0x0000000000000540                . = ALIGN (0x4)
+                0x0000000000000540                __bss_start__ = .
+ *(.bss*)
+ .bss.playdate  0x0000000000000540        0x4 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+                0x0000000000000540                playdate
+ .bss.pdrealloc
+                0x0000000000000544        0x4 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .bss           0x0000000000000548        0x4 build/game_device.o
+                0x0000000000000548                $s11game_device0A0_Wz
+ *(COMMON)
+ *(COM)
+                0x000000000000054c                . = ALIGN (0x4)
+                0x000000000000054c                __bss_end__ = .
+
+/DISCARD/
+ *(.ARM.exidx)
+OUTPUT(build/pdex.elf elf32-littlearm)
+
+.debug_info     0x0000000000000000     0xcb36
+ .debug_info    0x0000000000000000     0x6490 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_info    0x0000000000006490     0x66a6 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+
+.debug_abbrev   0x0000000000000000      0x5b6
+ .debug_abbrev  0x0000000000000000      0x274 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_abbrev  0x0000000000000274      0x342 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+
+.debug_aranges  0x0000000000000000       0x50
+ .debug_aranges
+                0x0000000000000000       0x18 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_aranges
+                0x0000000000000018       0x38 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+
+.debug_macro    0x0000000000000000     0x1dd9
+ .debug_macro   0x0000000000000000      0x1cf build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x00000000000001cf      0xaa8 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x0000000000000c77       0x22 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x0000000000000c99       0x8e build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x0000000000000d27       0x51 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x0000000000000d78       0xef build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x0000000000000e67       0x6a build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x0000000000000ed1      0x1df build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x00000000000010b0       0x18 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x00000000000010c8       0x5e build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x0000000000001126       0x35 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x000000000000115b       0x34 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x000000000000118f       0x16 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x00000000000011a5      0x10e build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x00000000000012b3       0x8d build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x0000000000001340       0x58 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x0000000000001398       0x1f build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x00000000000013b7       0x43 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x00000000000013fa       0x20 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x000000000000141a      0x18e build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x00000000000015a8      0x339 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x00000000000018e1       0x16 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x00000000000018f7       0x29 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x0000000000001920       0x28 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x0000000000001948       0x58 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x00000000000019a0       0x16 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x00000000000019b6       0x35 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x00000000000019eb       0x1c build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x0000000000001a07       0x22 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x0000000000001a29      0x1e1 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_macro   0x0000000000001c0a      0x1cf build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+
+.debug_line     0x0000000000000000      0x89f
+ .debug_line    0x0000000000000000      0x400 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .debug_line    0x0000000000000400      0x49f build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+
+.debug_str      0x0000000000000000     0x9e0d
+ .debug_str     0x0000000000000000     0x9ce4 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+                                       0xa193 (size before relaxing)
+ .debug_str     0x0000000000009ce4      0x129 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+                                       0xa282 (size before relaxing)
+
+.comment        0x0000000000000000       0x79
+ .comment       0x0000000000000000       0x79 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+                                         0x7a (size before relaxing)
+ .comment       0x0000000000000079       0x7a build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+
+.ARM.attributes
+                0x0000000000000000       0x3d
+ .ARM.attributes
+                0x0000000000000000       0x39 build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+ .ARM.attributes
+                0x0000000000000039       0x34 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .ARM.attributes
+                0x000000000000006d       0x4b build/game_device.o
+ .ARM.attributes
+                0x00000000000000b8       0x34 /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-rand.o)
+ .ARM.attributes
+                0x00000000000000ec       0x32 /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-impure.o)
+
+.note.GNU-stack
+                0x0000000000000000        0x0
+ .note.GNU-stack
+                0x0000000000000000        0x0 build/game_device.o
+
+.debug_loc      0x0000000000000000      0x21c
+ .debug_loc     0x0000000000000000      0x21c build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+
+.debug_ranges   0x0000000000000000       0x28
+ .debug_ranges  0x0000000000000000       0x28 build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+
+.debug_frame    0x0000000000000000       0x98
+ .debug_frame   0x0000000000000000       0x5c build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+ .debug_frame   0x000000000000005c       0x3c /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-rand.o)
+
+Cross Reference Table
+
+Symbol                                            File
+$s11game_device0A0_WZ                             build/game_device.o
+$s11game_device0A0_Wz                             build/game_device.o
+$s11game_device12eventHandler7pointer0C03args5Int32VSvSg_So13PDSystemEventas6UInt32VtF build/game_device.o
+$s11game_device12eventHandler7pointer0C03args5Int32VSvSg_So13PDSystemEventas6UInt32VtFAgHcfU_To build/game_device.o
+$s15playdate_device14posix_memalignys5Int32VSpySvSgG_S2itF build/game_device.o
+$ss13swift_release6objectyBp_tF                   build/game_device.o
+$ss15swift_release_n6object1nyBp_s6UInt32VtF      build/game_device.o
+$ss20swift_clearSensitive3buf6nbytesySv_SitF      build/game_device.o
+$ss25swift_bridgeObjectRelease6objectyBp_tF       build/game_device.o
+$ss27swift_bridgeObjectRelease_n6object1nyBp_s6UInt32VtF build/game_device.o
+_GLOBAL_OFFSET_TABLE_                             build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+__aeabi_memclr                                    /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-aeabi_memclr.o)
+                                                  build/game_device.o
+__aeabi_memclr4                                   /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-aeabi_memclr.o)
+__aeabi_memclr8                                   /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-aeabi_memclr.o)
+__aeabi_memset                                    /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-aeabi_memset-soft.o)
+                                                  /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-aeabi_memclr.o)
+__aeabi_memset4                                   /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-aeabi_memset-soft.o)
+__aeabi_memset8                                   /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-aeabi_memset-soft.o)
+_free_r                                           build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+                                                  /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-malloc.o)
+_global_impure_ptr                                /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-impure.o)
+_impure_ptr                                       /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-impure.o)
+                                                  /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-rand.o)
+                                                  /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-malloc.o)
+_malloc_r                                         build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+                                                  /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-malloc.o)
+_realloc_r                                        build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+eventHandler                                      build/game_device.o
+                                                  build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+eventHandlerShim                                  build//Users/ally/Developer/PlaydateSDK/C_API/buildsupport/setup.o
+free                                              /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-malloc.o)
+                                                  build/game_device.o
+malloc                                            /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-malloc.o)
+                                                  build/game_device.o
+playdate                                          build//Users/ally/clones/bodycheck/Sources/CPlaydate/playdate.o
+                                                  build/game_device.o
+rand                                              /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-rand.o)
+srand                                             /usr/local/playdate/gcc-arm-none-eabi-9-2019-q4-major/bin/../lib/gcc/arm-none-eabi/9.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(lib_a-rand.o)
+                                                  build/game_device.o
+swift_allocObject                                 build/game_device.o
+swift_beginAccess                                 build/game_device.o
+swift_bridgeObjectRelease                         build/game_device.o
+swift_bridgeObjectRelease_n                       build/game_device.o
+swift_bridgeObjectRetain                          build/game_device.o
+swift_bridgeObjectRetain_n                        build/game_device.o
+swift_clearSensitive                              build/game_device.o
+swift_deallocClassInstance                        build/game_device.o
+swift_deallocObject                               build/game_device.o
+swift_deallocPartialClassInstance                 build/game_device.o
+swift_deletedMethodError                          build/game_device.o
+swift_dynamicCastClass                            build/game_device.o
+swift_endAccess                                   build/game_device.o
+swift_errorInMain                                 build/game_device.o
+swift_initStackObject                             build/game_device.o
+swift_initStaticObject                            build/game_device.o
+swift_isUniquelyReferenced_native                 build/game_device.o
+swift_isUniquelyReferenced_nonNull_native         build/game_device.o
+swift_once                                        build/game_device.o
+swift_release                                     build/game_device.o
+swift_release_n                                   build/game_device.o
+swift_retain                                      build/game_device.o
+swift_retain_n                                    build/game_device.o
+swift_setDeallocating                             build/game_device.o
+swift_slowAlloc                                   build/game_device.o
+swift_slowDealloc                                 build/game_device.o
+swift_unexpectedError                             build/game_device.o
+swift_willThrow                                   build/game_device.o
