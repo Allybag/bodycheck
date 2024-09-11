@@ -2,12 +2,23 @@ print("Press B to create or remove a barrier")
 print("Press A to toggle diagonal moves")
 
 import "CoreLibs/graphics"
+import "CoreLibs/object"
 
 local gfx = playdate.graphics
 local abs = math.abs
 
-local player = playdate.geometry.point.new(16, 6)
-player_speed = 0.25
+class('Body').extends()
+
+function Body:init(x, y, speed, thickness)
+	Body.super.init(self)
+	self.x = x
+	self.y = y
+	self.speed = speed
+	self.thickness = thickness
+end
+
+local player = Body(16, 6, 0.25, 3)
+local enemy = Body(1, 1, 0.25, 1)
 
 local w = 20
 local h = 12
@@ -32,11 +43,11 @@ local function drawGrid()
     gfx.setLineWidth(1)
 
     for x = 1, w do
-        -- gfx.drawLine(x*20, 0, x*20, h*20)
+        gfx.drawLine(x*20, 0, x*20, h*20)
     end
 
     for y = 1, h do
-        -- gfx.drawLine(0, y*20, w*20, y*20)
+        gfx.drawLine(0, y*20, w*20, y*20)
     end
 
     for x = 0, w-1 do
@@ -74,22 +85,20 @@ local function drawGameOver()
     gfx.drawText(errorString, (dw-bw)/2 + 15, (dh-bh)/2 + 15)
 end
 
-local function nodeIsActive(x, y)
-    local index = (y * w) + x - w
-    if grid[index] == 1 then
-        return true
-    end
+local function index(x, y)
+    return (y * w) + x - w
+end
 
-    return false
+local function nodeIsActive(x, y)
+    return grid[index(x, y)] == 1
 end
 
 local function flipGridAt(x, y)
-    local index = ((y-1) * w + x-1) + 1
-
-    if grid[index] == 1 then
-        grid[index] = 0
+    local gridIndex = index(x, y)
+    if grid[gridIndex] == 1 then
+        grid[gridIndex] = 0
     else
-        grid[index] = 1
+        grid[gridIndex] = 1
     end
 end
 
@@ -113,7 +122,6 @@ local function flipSelectedSquare(x, y)
         connectNode(graph, node, x+1, y, 10)
         connectNode(graph, node, x, y-1, 10)
         connectNode(graph, node, x, y+1, 10)
-
     end
 
     flipGridAt(x, y)
@@ -125,29 +133,20 @@ function round(float)
     return math.floor(float + 0.5)
 end
 
-enemy_x = 1
-enemy_y = 1
 graph = playdate.pathfinder.graph.new2DGrid(w, h, false, grid)
 
-local function drawEnemy()
+local function drawBody(body)
     gfx.setColor(gfx.kColorBlack)
-    gfx.setLineWidth(1)
+    gfx.setLineWidth(body.thickness)
 
-    gfx.drawRect((enemy_x-1)*20, (enemy_y-1)*20, 21, 21)
+    gfx.drawRect((body.x-1)*20, (body.y-1)*20, 21, 21)
 end
 
-local function drawCursor()
-    gfx.setColor(gfx.kColorBlack)
-    gfx.setLineWidth(3)
+function kill(body)
+    flipSelectedSquare(round(body.x), round(body.y))
 
-    gfx.drawRect((player.x-1)*20, (player.y-1)*20, 21, 21)
-end
-
-function reset()
-    flipSelectedSquare(round(enemy_x), round(enemy_y))
-
-    enemy_x = 1
-    enemy_y = 1
+    body.x = 1
+    body.y = 1
 end
 
 function moveIsPossible(targetX, targetY)
@@ -212,16 +211,16 @@ function playdate.update()
     if playdate.buttonJustReleased(playdate.kButtonB) then
         shoot()
     elseif playdate.buttonIsPressed(playdate.kButtonUp) then
-        targetY = player.y - player_speed
+        targetY = player.y - player.speed
         direction = playdate.kButtonUp
     elseif playdate.buttonIsPressed(playdate.kButtonDown) then
-        targetY = player.y + player_speed
+        targetY = player.y + player.speed
         direction = playdate.kButtonDown
     elseif playdate.buttonIsPressed(playdate.kButtonRight) then
-        targetX = player.x + player_speed
+        targetX = player.x + player.speed
         direction = playdate.kButtonRight
     elseif playdate.buttonIsPressed(playdate.kButtonLeft) then
-        targetX = player.x - player_speed
+        targetX = player.x - player.speed
         direction = playdate.kButtonLeft
     end
 
@@ -231,7 +230,7 @@ function playdate.update()
     end
 
     if bullet ~= nil then
-        bullet_speed = player_speed * 4
+        bullet_speed = player.speed * 4
         width = bullet_speed
         height = bullet_speed
 
@@ -253,10 +252,10 @@ function playdate.update()
             drawBullet()
         end
 
-        hit = playdate.geometry.rect.fast_intersection(bullet.x, bullet.y, width, height, enemy_x, enemy_y, 1, 1)
+        hit = playdate.geometry.rect.fast_intersection(bullet.x, bullet.y, width, height, enemy.x, enemy.y, 1, 1)
         if hit ~= 0.0 then
             print(hit)
-            reset()
+            kill(enemy)
             bullet = nil
         elseif not moveIsPossible(bullet.x, bullet.y) then
             bullet = nil
@@ -267,20 +266,20 @@ function playdate.update()
 
     drawGrid()
 
-    enemyNode = graph:nodeWithXY(round(enemy_x), round(enemy_y))
+    enemyNode = graph:nodeWithXY(round(enemy.x), round(enemy.y))
     endNode = graph:nodeWithXY(round(player.x), round(player.y))
     path = graph:findPath(enemyNode, endNode, heuristicFunction)
     if path ~= nil then
         local n = path[2]
         if n ~= nil then
-            if n.x > enemy_x then
-                enemy_x = enemy_x + (player_speed * 1)
-            elseif n.x < enemy_x then
-                enemy_x = enemy_x - (player_speed * 1)
-            elseif n.y > enemy_y then
-                enemy_y = enemy_y + (player_speed * 1)
-            elseif n.y < enemy_y then
-                enemy_y = enemy_y - (player_speed * 1)
+            if n.x > enemy.x then
+                enemy.x = enemy.x + enemy.speed
+            elseif n.x < enemy.x then
+                enemy.x = enemy.x - enemy.speed
+            elseif n.y > enemy.y then
+                enemy.y = enemy.y + enemy.speed
+            elseif n.y < enemy.y then
+                enemy.y = enemy.y - enemy.speed
             end
         else
             drawGameOver()
@@ -289,7 +288,7 @@ function playdate.update()
         drawGameOver()
     end
 
-    drawCursor()
-    drawEnemy()
+    drawBody(player)
+    drawBody(enemy)
     playdate.drawFPS()
 end
