@@ -6,6 +6,7 @@ import "CoreLibs/object"
 
 local gfx = playdate.graphics
 local abs = math.abs
+local didHit = playdate.geometry.rect.fast_intersection
 
 class('Body').extends()
 function Body:init(x, y, speed, size, direction, thickness)
@@ -42,7 +43,7 @@ function Grid:init(width, height)
     assert(count == self.width * self.height)
 end
 
-local function drawGrid(grid)
+local function drawGridLines(grid)
     gfx.setColor(gfx.kColorBlack)
     gfx.setLineWidth(1)
 
@@ -53,6 +54,11 @@ local function drawGrid(grid)
     for y = 1, grid.height do
         gfx.drawLine(0, y * 20, grid.width * 20, y * 20)
     end
+end
+
+local function drawGrid(grid)
+    gfx.setColor(gfx.kColorBlack)
+    gfx.setLineWidth(1)
 
     for x = 0, grid.width - 1 do
         for y = 0, grid.height - 1 do
@@ -61,11 +67,10 @@ local function drawGrid(grid)
             end
         end
     end
-
 end
 
-local function drawGameOver()
-    local errorString = "*Game Over*"
+local function drawGameOver(score)
+    local errorString = "*Game Over* You scored: " .. tostring(score)
     local tw, th = gfx.getTextSize(errorString)
     local bw = tw + 30
     local bh = th + 30
@@ -103,6 +108,27 @@ local function flipGridAt(grid, x, y)
         grid.grid[gridIndex] = 0
     else
         grid.grid[gridIndex] = 1
+    end
+end
+
+local function emptyBorderSquare(grid)
+    while true do
+        local key = math.random(4)
+        print("Key: ", key)
+        local point = playdate.geometry.point.new(0, 0)
+        if key == 1 then
+            point = playdate.geometry.point.new(1, math.random(grid.height))
+        elseif key == 2 then
+            point = playdate.geometry.point.new(grid.width, math.random(grid.height))
+        elseif key == 3 then
+            point = playdate.geometry.point.new(math.random(grid.width), 1)
+        elseif key == 4 then
+            point = playdate.geometry.point.new(math.random(grid.width), grid.height)
+        end
+
+        if nodeIsActive(grid, point.x, point.y) then
+            return point
+        end
     end
 end
 
@@ -145,9 +171,6 @@ end
 
 function kill(grid, graph, body)
     flipSelectedSquare(grid, graph, round(body.x), round(body.y))
-
-    body.x = 1
-    body.y = 1
 end
 
 function moveIsPossible(grid, targetX, targetY)
@@ -182,14 +205,24 @@ local heuristicFunction = function(enemyNode, goalNode)
     return result + abs(enemyNode.x - goalNode.x) + abs(enemyNode.y - goalNode.y)
 end
 
-local player = Body(16, 6, 0.25, 21, playdate.kButtonRight, 3)
-local enemy = Body(1, 1, 0.25, 21, 0, 1)
+local player = Body(16, 6, 0.25, 21, playdate.kButtonRight, 4)
+local enemies = {}
 local bullet = nil
 local grid = Grid(20, 12)
+local frameCount = 0
+local spawnSpeed = 100
+local score = 0
 
 local graph = playdate.pathfinder.graph.new2DGrid(grid.width, grid.height, false, grid.grid)
 
 function playdate.update()
+    if frameCount % spawnSpeed == 0 or next(enemies) == nil then
+        local square = emptyBorderSquare(grid)
+        enemies[frameCount] = Body(square.x, square.y, 0.25, 21, playdate.kButtonRight, 1)
+        spawnSpeed = spawnSpeed - 1
+    end
+    frameCount = frameCount + 1
+
     gfx.clear()
 
     targetX = player.x
@@ -236,40 +269,53 @@ function playdate.update()
 
         drawBody(bullet)
 
-        hit = playdate.geometry.rect.fast_intersection(bullet.x, bullet.y, width, height, enemy.x, enemy.y, 1, 1)
-        if hit ~= 0.0 then
-            print(hit)
-            kill(grid, graph, enemy)
-            bullet = nil
-        elseif not moveIsPossible(grid, bullet.x, bullet.y) then
+        for key, enemy in pairs(enemies) do
+            hit = didHit(bullet.x, bullet.y, width, height, enemy.x, enemy.y, 1, 1)
+            if hit ~= 0.0 then
+                print(hit)
+                kill(grid, graph, enemy)
+                bullet = nil
+                enemies[key] = nil
+                score = score + 1
+                break
+            end
+        end
+
+        if bullet ~= nil and not moveIsPossible(grid, bullet.x, bullet.y) then
             bullet = nil
         end
     end
 
-    enemyNode = graph:nodeWithXY(round(enemy.x), round(enemy.y))
     endNode = graph:nodeWithXY(round(player.x), round(player.y))
-    path = graph:findPath(enemyNode, endNode, heuristicFunction)
-    if path ~= nil then
-        local n = path[2]
-        if n ~= nil then
-            if n.x > enemy.x then
-                enemy.x = enemy.x + enemy.speed
-            elseif n.x < enemy.x then
-                enemy.x = enemy.x - enemy.speed
-            elseif n.y > enemy.y then
-                enemy.y = enemy.y + enemy.speed
-            elseif n.y < enemy.y then
-                enemy.y = enemy.y - enemy.speed
+    for key, enemy in pairs(enemies) do
+        enemyNode = graph:nodeWithXY(round(enemy.x), round(enemy.y))
+        path = graph:findPath(enemyNode, endNode, heuristicFunction)
+        if path ~= nil then
+            local n = path[2]
+            if n ~= nil then
+                if n.x > enemy.x then
+                    enemy.x = enemy.x + enemy.speed
+                elseif n.x < enemy.x then
+                    enemy.x = enemy.x - enemy.speed
+                elseif n.y > enemy.y then
+                    enemy.y = enemy.y + enemy.speed
+                elseif n.y < enemy.y then
+                    enemy.y = enemy.y - enemy.speed
+                end
+            else
+                drawGameOver(score)
             end
-        else
-            drawGameOver()
         end
-    else
-        drawGameOver()
     end
 
     drawGrid(grid)
+    if false then
+        drawGridLines(grid)
+    end
+
     drawBody(player)
-    drawBody(enemy)
+    for key, enemy in pairs(enemies) do
+        drawBody(enemy)
+    end
     playdate.drawFPS()
 end
