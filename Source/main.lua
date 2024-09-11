@@ -8,17 +8,15 @@ local gfx = playdate.graphics
 local abs = math.abs
 
 class('Body').extends()
-
-function Body:init(x, y, speed, thickness)
+function Body:init(x, y, speed, size, direction, thickness)
 	Body.super.init(self)
 	self.x = x
 	self.y = y
 	self.speed = speed
+	self.size = size
+	self.direction = direction
 	self.thickness = thickness
 end
-
-local player = Body(16, 6, 0.25, 3)
-local enemy = Body(1, 1, 0.25, 1)
 
 class('Grid').extends()
 function Grid:init(width, height)
@@ -43,8 +41,6 @@ function Grid:init(width, height)
 
     assert(count == self.width * self.height)
 end
-
-grid = Grid(20, 12)
 
 local function drawGrid(grid)
     gfx.setColor(gfx.kColorBlack)
@@ -118,7 +114,7 @@ local function connectNode(grid, node, x, y, weight)
     node:addConnectionToNodeWithXY(x, y, weight, true)
 end
 
-local function flipSelectedSquare(grid, x, y)
+local function flipSelectedSquare(grid, graph, x, y)
     local node = graph:nodeWithXY(x, y)
 
     if nodeIsActive(grid, x, y) then
@@ -144,11 +140,11 @@ local function drawBody(body)
     gfx.setColor(gfx.kColorBlack)
     gfx.setLineWidth(body.thickness)
 
-    gfx.drawRect((body.x - 1) * 20, (body.y - 1) * 20, 21, 21)
+    gfx.drawRect((body.x - 1) * 20, (body.y - 1) * 20, body.size, body.size)
 end
 
-function kill(grid, body)
-    flipSelectedSquare(grid, round(body.x), round(body.y))
+function kill(grid, graph, body)
+    flipSelectedSquare(grid, graph, round(body.x), round(body.y))
 
     body.x = 1
     body.y = 1
@@ -172,27 +168,6 @@ function moveIsPossible(grid, targetX, targetY)
     return true
 end
 
-direction = playdate.kButtonRight
-bulletDirection = playdate.kButtonRight
-
-bullet = nil
-function shoot()
-    if bullet ~= nil then
-        return
-    end
-
-    bullet = playdate.geometry.point.new(player.x, player.y)
-    bulletDirection = direction
-end
-
-local function drawBullet()
-    gfx.setColor(gfx.kColorBlack)
-    gfx.setLineWidth(1)
-
-    gfx.drawRect((bullet.x - 1) * 20, (bullet.y - 1) * 20, 3, 3)
-end
-
-
 -- Manhattan distance, plus encouragement to line up and be easily shot
 local heuristicFunction = function(enemyNode, goalNode)
     result = 0
@@ -207,7 +182,12 @@ local heuristicFunction = function(enemyNode, goalNode)
     return result + abs(enemyNode.x - goalNode.x) + abs(enemyNode.y - goalNode.y)
 end
 
-graph = playdate.pathfinder.graph.new2DGrid(grid.width, grid.height, false, grid.grid)
+local player = Body(16, 6, 0.25, 21, playdate.kButtonRight, 3)
+local enemy = Body(1, 1, 0.25, 21, 0, 1)
+local bullet = nil
+local grid = Grid(20, 12)
+
+local graph = playdate.pathfinder.graph.new2DGrid(grid.width, grid.height, false, grid.grid)
 
 function playdate.update()
     gfx.clear()
@@ -215,20 +195,20 @@ function playdate.update()
     targetX = player.x
     targetY = player.y
 
-    if playdate.buttonJustReleased(playdate.kButtonB) then
-        shoot()
+    if playdate.buttonJustReleased(playdate.kButtonB) and bullet == nil then
+        bullet = Body(player.x, player.y, 1, 3, player.direction, 3)
     elseif playdate.buttonIsPressed(playdate.kButtonUp) then
         targetY = player.y - player.speed
-        direction = playdate.kButtonUp
+        player.direction = playdate.kButtonUp
     elseif playdate.buttonIsPressed(playdate.kButtonDown) then
         targetY = player.y + player.speed
-        direction = playdate.kButtonDown
+        player.direction = playdate.kButtonDown
     elseif playdate.buttonIsPressed(playdate.kButtonRight) then
         targetX = player.x + player.speed
-        direction = playdate.kButtonRight
+        player.direction = playdate.kButtonRight
     elseif playdate.buttonIsPressed(playdate.kButtonLeft) then
         targetX = player.x - player.speed
-        direction = playdate.kButtonLeft
+        player.direction = playdate.kButtonLeft
     end
 
     if moveIsPossible(grid, targetX, targetY) then
@@ -237,41 +217,34 @@ function playdate.update()
     end
 
     if bullet ~= nil then
-        bullet_speed = player.speed * 4
-        width = bullet_speed
-        height = bullet_speed
+        width = bullet.speed
+        height = bullet.speed
 
-        if bulletDirection == playdate.kButtonUp then
-            bullet.y = bullet.y - bullet_speed
-            height = bullet_speed
-        elseif bulletDirection == playdate.kButtonDown then
-            bullet.y = bullet.y + bullet_speed
-            height = bullet_speed
-        elseif bulletDirection == playdate.kButtonRight then
-            bullet.x = bullet.x + bullet_speed
-            width = bullet_speed
-        elseif bulletDirection == playdate.kButtonLeft then
-            bullet.x = bullet.x - bullet_speed
-            width = bullet_speed
+        if bullet.direction == playdate.kButtonUp then
+            bullet.y = bullet.y - bullet.speed
+            height = bullet.speed
+        elseif bullet.direction == playdate.kButtonDown then
+            bullet.y = bullet.y + bullet.speed
+            height = bullet.speed
+        elseif bullet.direction == playdate.kButtonRight then
+            bullet.x = bullet.x + bullet.speed
+            width = bullet.speed
+        elseif bullet.direction == playdate.kButtonLeft then
+            bullet.x = bullet.x - bullet.speed
+            width = bullet.speed
         end
 
-        if bullet ~= nil then
-            drawBullet()
-        end
+        drawBody(bullet)
 
         hit = playdate.geometry.rect.fast_intersection(bullet.x, bullet.y, width, height, enemy.x, enemy.y, 1, 1)
         if hit ~= 0.0 then
             print(hit)
-            kill(grid, enemy)
+            kill(grid, graph, enemy)
             bullet = nil
         elseif not moveIsPossible(grid, bullet.x, bullet.y) then
             bullet = nil
         end
-
-
     end
-
-    drawGrid(grid)
 
     enemyNode = graph:nodeWithXY(round(enemy.x), round(enemy.y))
     endNode = graph:nodeWithXY(round(player.x), round(player.y))
@@ -295,6 +268,7 @@ function playdate.update()
         drawGameOver()
     end
 
+    drawGrid(grid)
     drawBody(player)
     drawBody(enemy)
     playdate.drawFPS()
