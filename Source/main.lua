@@ -1,6 +1,3 @@
-print("Press B to create or remove a barrier")
-print("Press A to toggle diagonal moves")
-
 import "CoreLibs/graphics"
 import "CoreLibs/object"
 
@@ -23,18 +20,12 @@ class('Grid').extends()
 function Grid:init(width, height)
     self.width = width
     self.height = height
-    self.grid = {1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-              1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-              0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-              1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1,
-              1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
-              1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
-              1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
-              1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
-              1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
-              1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
-              1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
-              1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1}
+    self.grid = {}
+
+    for i = 1, self.width * self.height do
+        self.grid[i] = 1
+    end
+
     count = 0
     for key, value in pairs(self.grid) do
         count = count + 1
@@ -114,7 +105,6 @@ end
 local function emptyBorderSquare(grid)
     while true do
         local key = math.random(4)
-        print("Key: ", key)
         local point = playdate.geometry.point.new(0, 0)
         if key == 1 then
             point = playdate.geometry.point.new(1, math.random(grid.height))
@@ -209,8 +199,9 @@ local player = Body(16, 6, 0.25, 21, playdate.kButtonRight, 4)
 local enemies = {}
 local bullet = nil
 local grid = Grid(20, 12)
+local framesSinceSpawn = 0
 local frameCount = 0
-local spawnSpeed = 50
+local spawnSpeed = 30
 local score = 0
 local gameOver = false
 
@@ -221,11 +212,25 @@ function playdate.update()
         drawGameOver(score)
         return
     end
-    if frameCount % spawnSpeed == 0 or next(enemies) == nil then
+
+    if framesSinceSpawn == spawnSpeed or next(enemies) == nil then
         local square = emptyBorderSquare(grid)
+        print("Spawning enemy on frame ", framesSinceSpawn, " at ", square.x, square.y)
         enemies[frameCount] = Body(square.x, square.y, 0.125, 21, playdate.kButtonRight, 1)
-        spawnSpeed = spawnSpeed - 1
+        framesSinceSpawn = 0
+
+        if spawnSpeed > 15 and frameCount % 2 == 0 then
+            print("Lowering spawnspeed to ", spawnSpeed)
+            spawnSpeed = spawnSpeed - 1
+        else
+            count = 0
+            for key, value in pairs(enemies) do
+                count = count + 1
+            end
+            print("Going mental?, enemies: ", count)
+        end
     end
+    framesSinceSpawn = framesSinceSpawn + 1
     frameCount = frameCount + 1
 
     gfx.clear()
@@ -277,7 +282,6 @@ function playdate.update()
         for key, enemy in pairs(enemies) do
             hit = didHit(bullet.x, bullet.y, width, height, enemy.x, enemy.y, 1, 1)
             if hit ~= 0.0 then
-                print(hit)
                 kill(grid, graph, enemy)
                 bullet = nil
                 enemies[key] = nil
