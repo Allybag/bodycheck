@@ -210,15 +210,20 @@ local enemies = {}
 local bullet = nil
 local grid = Grid(20, 12)
 local frameCount = 0
-local spawnSpeed = 100
+local spawnSpeed = 50
 local score = 0
+local gameOver = false
 
 local graph = playdate.pathfinder.graph.new2DGrid(grid.width, grid.height, false, grid.grid)
 
 function playdate.update()
+    if gameOver then
+        drawGameOver(score)
+        return
+    end
     if frameCount % spawnSpeed == 0 or next(enemies) == nil then
         local square = emptyBorderSquare(grid)
-        enemies[frameCount] = Body(square.x, square.y, 0.25, 21, playdate.kButtonRight, 1)
+        enemies[frameCount] = Body(square.x, square.y, 0.125, 21, playdate.kButtonRight, 1)
         spawnSpeed = spawnSpeed - 1
     end
     frameCount = frameCount + 1
@@ -303,7 +308,7 @@ function playdate.update()
                     enemy.y = enemy.y - enemy.speed
                 end
             else
-                drawGameOver(score)
+                gameOver = true
             end
         end
     end
