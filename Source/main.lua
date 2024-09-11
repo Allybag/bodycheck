@@ -20,10 +20,11 @@ end
 local player = Body(16, 6, 0.25, 3)
 local enemy = Body(1, 1, 0.25, 1)
 
-local w = 20
-local h = 12
-
-local grid = {1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+class('Grid').extends()
+function Grid:init(width, height)
+    self.width = width
+    self.height = height
+    self.grid = {1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
               1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
               0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
               1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1,
@@ -35,25 +36,32 @@ local grid = {1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
               1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
               1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
               1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1}
+    count = 0
+    for key, value in pairs(self.grid) do
+        count = count + 1
+    end
 
-local path, graph, enemyNode, endNode
+    assert(count == self.width * self.height)
+end
 
-local function drawGrid()
+grid = Grid(20, 12)
+
+local function drawGrid(grid)
     gfx.setColor(gfx.kColorBlack)
     gfx.setLineWidth(1)
 
-    for x = 1, w do
-        gfx.drawLine(x*20, 0, x*20, h*20)
+    for x = 1, grid.width do
+        gfx.drawLine(x * 20, 0, x * 20, grid.height * 20)
     end
 
-    for y = 1, h do
-        gfx.drawLine(0, y*20, w*20, y*20)
+    for y = 1, grid.height do
+        gfx.drawLine(0, y * 20, grid.width * 20, y * 20)
     end
 
-    for x = 0, w-1 do
-        for y = 0, h-1 do
-            if grid[((y)*w)+x+1] == 0 then
-                gfx.fillRect(x*20, y*20, 20, 20)
+    for x = 0, grid.width - 1 do
+        for y = 0, grid.height - 1 do
+            if grid.grid[(y * grid.width) + x + 1] == 0 then
+                gfx.fillRect(x * 20, y * 20, 20, 20)
             end
         end
     end
@@ -85,82 +93,79 @@ local function drawGameOver()
     gfx.drawText(errorString, (dw-bw)/2 + 15, (dh-bh)/2 + 15)
 end
 
-local function index(x, y)
-    return (y * w) + x - w
+local function index(grid, x, y)
+    return (y * grid.width) + x - grid.width
 end
 
-local function nodeIsActive(x, y)
-    return grid[index(x, y)] == 1
+local function nodeIsActive(grid, x, y)
+    return grid.grid[index(grid, x, y)] == 1
 end
 
-local function flipGridAt(x, y)
-    local gridIndex = index(x, y)
-    if grid[gridIndex] == 1 then
-        grid[gridIndex] = 0
+local function flipGridAt(grid, x, y)
+    local gridIndex = index(grid, x, y)
+    if grid.grid[gridIndex] == 1 then
+        grid.grid[gridIndex] = 0
     else
-        grid[gridIndex] = 1
+        grid.grid[gridIndex] = 1
     end
 end
 
-local function connectNode(graph, node, x, y, weight)
-    if x < 1 or x > w or y < y or y > h or nodeIsActive(x, y) == false then
+local function connectNode(grid, node, x, y, weight)
+    if x < 1 or x > grid.width or y < y or y > grid.height or nodeIsActive(grid, x, y) == false then
         return
     end
 
     node:addConnectionToNodeWithXY(x, y, weight, true)
 end
 
-local function flipSelectedSquare(x, y)
+local function flipSelectedSquare(grid, x, y)
     local node = graph:nodeWithXY(x, y)
 
-    if nodeIsActive(x, y) then
+    if nodeIsActive(grid, x, y) then
         node:removeAllConnections()
     else
         -- add connections to neighbour nodes
         -- weights of 10 for horizontal and 14 for diagonal nodes tends to produce nicer paths than all equal weights
-        connectNode(graph, node, x-1, y, 10)
-        connectNode(graph, node, x+1, y, 10)
-        connectNode(graph, node, x, y-1, 10)
-        connectNode(graph, node, x, y+1, 10)
+        connectNode(grid, node, x-1, y, 10)
+        connectNode(grid, node, x+1, y, 10)
+        connectNode(grid, node, x, y-1, 10)
+        connectNode(grid, node, x, y+1, 10)
     end
 
-    flipGridAt(x, y)
-
-    path = graph:findPath(enemyNode, endNode)
+    flipGridAt(grid, x, y)
+    -- path = graph:findPath(enemyNode, endNode)
 end
 
 function round(float)
     return math.floor(float + 0.5)
 end
 
-graph = playdate.pathfinder.graph.new2DGrid(w, h, false, grid)
-
 local function drawBody(body)
     gfx.setColor(gfx.kColorBlack)
     gfx.setLineWidth(body.thickness)
 
-    gfx.drawRect((body.x-1)*20, (body.y-1)*20, 21, 21)
+    gfx.drawRect((body.x - 1) * 20, (body.y - 1) * 20, 21, 21)
 end
 
-function kill(body)
-    flipSelectedSquare(round(body.x), round(body.y))
+function kill(grid, body)
+    flipSelectedSquare(grid, round(body.x), round(body.y))
 
     body.x = 1
     body.y = 1
 end
 
-function moveIsPossible(targetX, targetY)
-    if targetX < 1 or targetY < 1 or targetX > w or targetY > h then
+function moveIsPossible(grid, targetX, targetY)
+    if targetX < 1 or targetY < 1 or targetX > grid.width or targetY > grid.height then
         return false
     end
 
-    if not nodeIsActive(math.floor(targetX), math.floor(targetY)) then
+    if not nodeIsActive(grid, math.floor(targetX), math.floor(targetY)) then
         return false
-    elseif not nodeIsActive(math.floor(targetX), math.ceil(targetY)) then
+    elseif not nodeIsActive(grid, math.floor(targetX), math.ceil(targetY)) then
         return false
-    elseif not nodeIsActive(math.ceil(targetX), math.floor(targetY)) then
+    elseif not nodeIsActive(grid, math.ceil(targetX), math.floor(targetY)) then
         return false
-    elseif not nodeIsActive(math.ceil(targetX), math.ceil(targetY)) then
+    elseif not nodeIsActive(grid, math.ceil(targetX), math.ceil(targetY)) then
         return false
     end
 
@@ -184,7 +189,7 @@ local function drawBullet()
     gfx.setColor(gfx.kColorBlack)
     gfx.setLineWidth(1)
 
-    gfx.drawRect((bullet.x-1)*20, (bullet.y-1)*20, 3, 3)
+    gfx.drawRect((bullet.x - 1) * 20, (bullet.y - 1) * 20, 3, 3)
 end
 
 
@@ -201,6 +206,8 @@ local heuristicFunction = function(enemyNode, goalNode)
 
     return result + abs(enemyNode.x - goalNode.x) + abs(enemyNode.y - goalNode.y)
 end
+
+graph = playdate.pathfinder.graph.new2DGrid(grid.width, grid.height, false, grid.grid)
 
 function playdate.update()
     gfx.clear()
@@ -224,7 +231,7 @@ function playdate.update()
         direction = playdate.kButtonLeft
     end
 
-    if moveIsPossible(targetX, targetY) then
+    if moveIsPossible(grid, targetX, targetY) then
         player.x = targetX
         player.y = targetY
     end
@@ -255,16 +262,16 @@ function playdate.update()
         hit = playdate.geometry.rect.fast_intersection(bullet.x, bullet.y, width, height, enemy.x, enemy.y, 1, 1)
         if hit ~= 0.0 then
             print(hit)
-            kill(enemy)
+            kill(grid, enemy)
             bullet = nil
-        elseif not moveIsPossible(bullet.x, bullet.y) then
+        elseif not moveIsPossible(grid, bullet.x, bullet.y) then
             bullet = nil
         end
 
 
     end
 
-    drawGrid()
+    drawGrid(grid)
 
     enemyNode = graph:nodeWithXY(round(enemy.x), round(enemy.y))
     endNode = graph:nodeWithXY(round(player.x), round(player.y))
