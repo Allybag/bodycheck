@@ -6,8 +6,8 @@ import "CoreLibs/graphics"
 local gfx = playdate.graphics
 local abs = math.abs
 
-local cursor = playdate.geometry.point.new(16, 6)
-cursor_speed = 0.25
+local player = playdate.geometry.point.new(16, 6)
+player_speed = 0.25
 
 local w = 20
 local h = 12
@@ -25,7 +25,7 @@ local grid = {1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
               1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1,
               1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1}
 
-local path, graph, startNode, endNode
+local path, graph, enemyNode, endNode
 
 local function drawGrid()
     gfx.setColor(gfx.kColorBlack)
@@ -118,36 +118,36 @@ local function flipSelectedSquare(x, y)
 
     flipGridAt(x, y)
 
-    path = graph:findPath(startNode, endNode)
+    path = graph:findPath(enemyNode, endNode)
 end
 
 function round(float)
     return math.floor(float + 0.5)
 end
 
-start_x = 1
-start_y = 1
+enemy_x = 1
+enemy_y = 1
 graph = playdate.pathfinder.graph.new2DGrid(w, h, false, grid)
 
 local function drawEnemy()
     gfx.setColor(gfx.kColorBlack)
     gfx.setLineWidth(1)
 
-    gfx.drawRect((start_x-1)*20, (start_y-1)*20, 21, 21)
+    gfx.drawRect((enemy_x-1)*20, (enemy_y-1)*20, 21, 21)
 end
 
 local function drawCursor()
     gfx.setColor(gfx.kColorBlack)
     gfx.setLineWidth(3)
 
-    gfx.drawRect((cursor.x-1)*20, (cursor.y-1)*20, 21, 21)
+    gfx.drawRect((player.x-1)*20, (player.y-1)*20, 21, 21)
 end
 
 function reset()
-    flipSelectedSquare(round(start_x), round(start_y))
+    flipSelectedSquare(round(enemy_x), round(enemy_y))
 
-    start_x = 1
-    start_y = 1
+    enemy_x = 1
+    enemy_y = 1
 end
 
 function moveIsPossible(targetX, targetY)
@@ -177,7 +177,7 @@ function shoot()
         return
     end
 
-    bullet = playdate.geometry.point.new(cursor.x, cursor.y)
+    bullet = playdate.geometry.point.new(player.x, player.y)
     bulletDirection = direction
 end
 
@@ -190,48 +190,48 @@ end
 
 
 -- Manhattan distance, plus encouragement to line up and be easily shot
-local heuristicFunction = function(startNode, goalNode)
+local heuristicFunction = function(enemyNode, goalNode)
     result = 0
-    if startNode.x ~= goalNode.x then
+    if enemyNode.x ~= goalNode.x then
         result = result + 100
     end
 
-    if startNode.y ~= goalNode.y then
+    if enemyNode.y ~= goalNode.y then
         result = result + 100
     end
 
-    return result + abs(startNode.x - goalNode.x) + abs(startNode.y - goalNode.y)
+    return result + abs(enemyNode.x - goalNode.x) + abs(enemyNode.y - goalNode.y)
 end
 
 function playdate.update()
     gfx.clear()
 
-    targetX = cursor.x
-    targetY = cursor.y
+    targetX = player.x
+    targetY = player.y
 
     if playdate.buttonJustReleased(playdate.kButtonB) then
         shoot()
     elseif playdate.buttonIsPressed(playdate.kButtonUp) then
-        targetY = cursor.y - cursor_speed
+        targetY = player.y - player_speed
         direction = playdate.kButtonUp
     elseif playdate.buttonIsPressed(playdate.kButtonDown) then
-        targetY = cursor.y + cursor_speed
+        targetY = player.y + player_speed
         direction = playdate.kButtonDown
     elseif playdate.buttonIsPressed(playdate.kButtonRight) then
-        targetX = cursor.x + cursor_speed
+        targetX = player.x + player_speed
         direction = playdate.kButtonRight
     elseif playdate.buttonIsPressed(playdate.kButtonLeft) then
-        targetX = cursor.x - cursor_speed
+        targetX = player.x - player_speed
         direction = playdate.kButtonLeft
     end
 
     if moveIsPossible(targetX, targetY) then
-        cursor.x = targetX
-        cursor.y = targetY
+        player.x = targetX
+        player.y = targetY
     end
 
     if bullet ~= nil then
-        bullet_speed = cursor_speed * 4
+        bullet_speed = player_speed * 4
         width = bullet_speed
         height = bullet_speed
 
@@ -253,7 +253,7 @@ function playdate.update()
             drawBullet()
         end
 
-        hit = playdate.geometry.rect.fast_intersection(bullet.x, bullet.y, width, height, start_x, start_y, 1, 1)
+        hit = playdate.geometry.rect.fast_intersection(bullet.x, bullet.y, width, height, enemy_x, enemy_y, 1, 1)
         if hit ~= 0.0 then
             print(hit)
             reset()
@@ -267,20 +267,20 @@ function playdate.update()
 
     drawGrid()
 
-    startNode = graph:nodeWithXY(round(start_x), round(start_y))
-    endNode = graph:nodeWithXY(round(cursor.x), round(cursor.y))
-    path = graph:findPath(startNode, endNode, heuristicFunction)
+    enemyNode = graph:nodeWithXY(round(enemy_x), round(enemy_y))
+    endNode = graph:nodeWithXY(round(player.x), round(player.y))
+    path = graph:findPath(enemyNode, endNode, heuristicFunction)
     if path ~= nil then
         local n = path[2]
         if n ~= nil then
-            if n.x > start_x then
-                start_x = start_x + (cursor_speed * 1)
-            elseif n.x < start_x then
-                start_x = start_x - (cursor_speed * 1)
-            elseif n.y > start_y then
-                start_y = start_y + (cursor_speed * 1)
-            elseif n.y < start_y then
-                start_y = start_y - (cursor_speed * 1)
+            if n.x > enemy_x then
+                enemy_x = enemy_x + (player_speed * 1)
+            elseif n.x < enemy_x then
+                enemy_x = enemy_x - (player_speed * 1)
+            elseif n.y > enemy_y then
+                enemy_y = enemy_y + (player_speed * 1)
+            elseif n.y < enemy_y then
+                enemy_y = enemy_y - (player_speed * 1)
             end
         else
             drawGameOver()
