@@ -148,7 +148,7 @@ local function flipSelectedSquare(grid, graph, x, y)
     -- path = graph:findPath(enemyNode, endNode)
 end
 
-function round(float)
+local function round(float)
     return math.floor(float + 0.5)
 end
 
@@ -159,11 +159,11 @@ local function drawBody(body)
     gfx.drawRect((body.x - 1) * 20, (body.y - 1) * 20, body.size, body.size)
 end
 
-function kill(grid, graph, body)
+local function kill(grid, graph, body)
     flipSelectedSquare(grid, graph, round(body.x), round(body.y))
 end
 
-function moveIsPossible(grid, targetX, targetY)
+local function moveIsPossible(grid, targetX, targetY)
     if targetX < 1 or targetY < 1 or targetX > grid.width or targetY > grid.height then
         return false
     end
@@ -179,6 +179,30 @@ function moveIsPossible(grid, targetX, targetY)
     end
 
     return true
+end
+
+-- Pressing a button overrides holding one down
+local function getInput(lastButton)
+    local inputs = { playdate.kButtonB, playdate.kButtonUp, playdate.kButtonDown,
+                     playdate.kButtonRight, playdate.kButtonLeft }
+
+    for i, input in pairs(inputs) do
+        if playdate.buttonJustPressed(input) then
+            return input
+        end
+    end
+
+    if lastButton ~= 0 and playdate.buttonIsPressed(lastButton) then
+        return lastButton
+    end
+
+    for i, input in pairs(inputs) do
+        if playdate.buttonIsPressed(input) then
+            return input
+        end
+    end
+
+    return 0
 end
 
 -- Manhattan distance, plus encouragement to line up and be easily shot
@@ -204,6 +228,7 @@ local frameCount = 0
 local spawnSpeed = 30
 local score = 0
 local gameOver = false
+local lastButton = 0
 
 local graph = playdate.pathfinder.graph.new2DGrid(grid.width, grid.height, false, grid.grid)
 
@@ -238,18 +263,20 @@ function playdate.update()
     targetX = player.x
     targetY = player.y
 
-    if playdate.buttonJustReleased(playdate.kButtonB) and bullet == nil then
+    input = getInput(lastButton)
+    lastButton = input
+    if input == playdate.kButtonB and bullet == nil then
         bullet = Body(player.x, player.y, 1, 3, player.direction, 3)
-    elseif playdate.buttonIsPressed(playdate.kButtonUp) then
+    elseif input == playdate.kButtonUp then
         targetY = player.y - player.speed
         player.direction = playdate.kButtonUp
-    elseif playdate.buttonIsPressed(playdate.kButtonDown) then
+    elseif input == playdate.kButtonDown then
         targetY = player.y + player.speed
         player.direction = playdate.kButtonDown
-    elseif playdate.buttonIsPressed(playdate.kButtonRight) then
+    elseif input == playdate.kButtonRight then
         targetX = player.x + player.speed
         player.direction = playdate.kButtonRight
-    elseif playdate.buttonIsPressed(playdate.kButtonLeft) then
+    elseif input == playdate.kButtonLeft then
         targetX = player.x - player.speed
         player.direction = playdate.kButtonLeft
     end
