@@ -6,7 +6,7 @@ local abs = math.abs
 local didHit = playdate.geometry.rect.fast_intersection
 
 class('Body').extends()
-function Body:init(x, y, speed, size, direction, thickness)
+function Body:init(x, y, speed, size, direction, thickness, image, upImage, downImage)
 	Body.super.init(self)
 	self.x = x
 	self.y = y
@@ -14,6 +14,9 @@ function Body:init(x, y, speed, size, direction, thickness)
 	self.size = size
 	self.direction = direction
 	self.thickness = thickness
+	self.image = image
+	self.upImage = upImage
+	self.downImage= downImage
 end
 
 class('Grid').extends()
@@ -136,8 +139,6 @@ local function flipSelectedSquare(grid, graph, x, y)
     if nodeIsActive(grid, x, y) then
         node:removeAllConnections()
     else
-        -- add connections to neighbour nodes
-        -- weights of 10 for horizontal and 14 for diagonal nodes tends to produce nicer paths than all equal weights
         connectNode(grid, node, x-1, y, 10)
         connectNode(grid, node, x+1, y, 10)
         connectNode(grid, node, x, y-1, 10)
@@ -145,7 +146,6 @@ local function flipSelectedSquare(grid, graph, x, y)
     end
 
     flipGridAt(grid, x, y)
-    -- path = graph:findPath(enemyNode, endNode)
 end
 
 local function round(float)
@@ -156,7 +156,19 @@ local function drawBody(body)
     gfx.setColor(gfx.kColorBlack)
     gfx.setLineWidth(body.thickness)
 
-    gfx.drawRect((body.x - 1) * 20, (body.y - 1) * 20, body.size, body.size)
+    if body.image ~= nil then
+        if body.direction == playdate.kButtonRight then
+            body.image:draw((body.x - 1) * 20, (body.y - 1) * 20)
+        elseif body.direction == playdate.kButtonLeft then
+            body.image:draw((body.x - 1) * 20, (body.y - 1) * 20, gfx.kImageFlippedX)
+        elseif body.direction == playdate.kButtonDown then
+            body.downImage:draw((body.x - 1) * 20, (body.y - 1) * 20)
+        elseif body.direction == playdate.kButtonUp then
+            body.upImage:draw((body.x - 1) * 20, (body.y - 1) * 20)
+        end
+    else
+        gfx.drawRect((body.x - 1) * 20, (body.y - 1) * 20, body.size, body.size)
+    end
 end
 
 local function kill(grid, graph, body)
@@ -183,8 +195,8 @@ end
 
 -- Pressing a button overrides holding one down
 local function getInput(lastButton)
-    local inputs = { playdate.kButtonB, playdate.kButtonUp, playdate.kButtonDown,
-                     playdate.kButtonRight, playdate.kButtonLeft }
+    local inputs = { playdate.kButtonB, playdate.kButtonA, playdate.kButtonUp,
+                     playdate.kButtonDown, playdate.kButtonRight, playdate.kButtonLeft }
 
     for i, input in pairs(inputs) do
         if playdate.buttonJustPressed(input) then
@@ -219,7 +231,11 @@ local heuristicFunction = function(enemyNode, goalNode)
     return result + abs(enemyNode.x - goalNode.x) + abs(enemyNode.y - goalNode.y)
 end
 
-local player = Body(16, 6, 0.25, 21, playdate.kButtonRight, 4)
+local enemyImage = gfx.image.new("Images/ninja"):scaledImage(1 / 20, 1 / 12)
+local playerImage = gfx.image.new("Images/player"):scaledImage(1 / 20, 1 / 12)
+local playerUpImage = gfx.image.new("Images/playerUp"):scaledImage(1 / 20, 1 / 12)
+local playerDownImage = gfx.image.new("Images/playerDown"):scaledImage(1 / 20, 1 / 12)
+local player = Body(16, 6, 0.25, 21, playdate.kButtonRight, 4, playerImage, playerUpImage, playerDownImage)
 local enemies = {}
 local bullet = nil
 local grid = Grid(20, 12)
@@ -229,6 +245,7 @@ local spawnSpeed = 30
 local score = 0
 local gameOver = false
 local lastButton = 0
+local leapCooldown = 0
 
 local graph = playdate.pathfinder.graph.new2DGrid(grid.width, grid.height, false, grid.grid)
 
@@ -241,22 +258,18 @@ function playdate.update()
     if framesSinceSpawn == spawnSpeed or next(enemies) == nil then
         local square = emptyBorderSquare(grid)
         print("Spawning enemy on frame ", framesSinceSpawn, " at ", square.x, square.y)
-        enemies[frameCount] = Body(square.x, square.y, 0.125, 21, playdate.kButtonRight, 1)
+        enemies[frameCount] = Body(square.x, square.y, 0.125, 21, playdate.kButtonRight, 1, enemyImage)
         framesSinceSpawn = 0
 
         if spawnSpeed > 15 and frameCount % 2 == 0 then
-            print("Lowering spawnspeed to ", spawnSpeed)
             spawnSpeed = spawnSpeed - 1
-        else
-            count = 0
-            for key, value in pairs(enemies) do
-                count = count + 1
-            end
-            print("Going mental?, enemies: ", count)
         end
     end
     framesSinceSpawn = framesSinceSpawn + 1
     frameCount = frameCount + 1
+    if leapCooldown > 0 then
+        leapCooldown = leapCooldown - 1
+    end
 
     gfx.clear()
 
@@ -267,6 +280,17 @@ function playdate.update()
     lastButton = input
     if input == playdate.kButtonB and bullet == nil then
         bullet = Body(player.x, player.y, 1, 3, player.direction, 3)
+    elseif input == playdate.kButtonA and leapCooldown == 0 then
+        leapCooldown = 30
+        if player.direction == playdate.kButtonDown then
+            targetY = player.y - player.speed * 20
+        elseif player.direction == playdate.kButtonUp then
+            targetY = player.y + player.speed * 20
+        elseif player.direction == playdate.kButtonLeft then
+            targetX = player.x + player.speed * 20
+        elseif player.direction == playdate.kButtonRight then
+            targetX = player.x - player.speed * 20
+        end
     elseif input == playdate.kButtonUp then
         targetY = player.y - player.speed
         player.direction = playdate.kButtonUp
