@@ -64,7 +64,7 @@ local function drawGrid(grid)
 end
 
 local function drawGameOver(score)
-    local errorString = "*Game Over* You scored: " .. tostring(score)
+    local errorString = "*Game Over* (Press A to restart) You scored: " .. tostring(score)
     local tw, th = gfx.getTextSize(errorString)
     local bw = tw + 30
     local bh = th + 30
@@ -96,13 +96,8 @@ local function nodeIsActive(grid, x, y)
     return grid.grid[index(grid, x, y)] == 1
 end
 
-local function flipGridAt(grid, x, y)
-    local gridIndex = index(grid, x, y)
-    if grid.grid[gridIndex] == 1 then
-        grid.grid[gridIndex] = 0
-    else
-        grid.grid[gridIndex] = 1
-    end
+local function setGridAt(grid, x, y)
+    grid.grid[index(grid, x, y)] = 0
 end
 
 local function emptyBorderSquare(grid)
@@ -133,19 +128,13 @@ local function connectNode(grid, node, x, y, weight)
     node:addConnectionToNodeWithXY(x, y, weight, true)
 end
 
-local function flipSelectedSquare(grid, graph, x, y)
+local function setSelectedSquare(grid, graph, x, y)
     local node = graph:nodeWithXY(x, y)
 
     if nodeIsActive(grid, x, y) then
         node:removeAllConnections()
-    else
-        connectNode(grid, node, x-1, y, 10)
-        connectNode(grid, node, x+1, y, 10)
-        connectNode(grid, node, x, y-1, 10)
-        connectNode(grid, node, x, y+1, 10)
+        setGridAt(grid, x, y)
     end
-
-    flipGridAt(grid, x, y)
 end
 
 local function round(float)
@@ -169,10 +158,6 @@ local function drawBody(body)
     else
         gfx.drawRect((body.x - 1) * 20, (body.y - 1) * 20, body.size, body.size)
     end
-end
-
-local function kill(grid, graph, body)
-    flipSelectedSquare(grid, graph, round(body.x), round(body.y))
 end
 
 local function moveIsPossible(grid, targetX, targetY)
@@ -235,29 +220,56 @@ local enemyImage = gfx.image.new("Images/ninja"):scaledImage(1 / 20, 1 / 12)
 local playerImage = gfx.image.new("Images/player"):scaledImage(1 / 20, 1 / 12)
 local playerUpImage = gfx.image.new("Images/playerUp"):scaledImage(1 / 20, 1 / 12)
 local playerDownImage = gfx.image.new("Images/playerDown"):scaledImage(1 / 20, 1 / 12)
-local player = Body(16, 6, 0.25, 21, playdate.kButtonRight, 4, playerImage, playerUpImage, playerDownImage)
-local enemies = {}
-local bullet = nil
-local grid = Grid(20, 12)
-local framesSinceSpawn = 0
-local frameCount = 0
+
 local spawnSpeed = 30
+local framesSinceSpawn = 0
+local framesSinceDeath = 0
+local frameCount = 0
 local score = 0
-local gameOver = false
 local lastButton = 0
 local leapCooldown = 0
+local gameOver = false
+local bullet = nil
+local enemies = {}
+local grid = nil
+local player = nil
+local graph = nil
+local endNode = nil
 
-local graph = playdate.pathfinder.graph.new2DGrid(grid.width, grid.height, false, grid.grid)
+local function setUp()
+    spawnSpeed = 30
+    framesSinceSpawn = 0
+    framesSinceDeath = 0
+    frameCount = 0
+    score = 0
+    lastButton = 0
+    leapCooldown = 0
+    gameOver = false
+    bullet = nil
+    enemies = {}
+    grid = Grid(20, 12)
+    player = Body(16, 6, 0.25, 21, playdate.kButtonRight, 4, playerImage, playerUpImage, playerDownImage)
+
+    graph = playdate.pathfinder.graph.new2DGrid(grid.width, grid.height, false, grid.grid)
+    endNode = graph:nodeWithXY(round(player.x), round(player.y))
+end
+
+setUp()
 
 function playdate.update()
     if gameOver then
         drawGameOver(score)
+        if framesSinceDeath > 15 and playdate.buttonJustPressed(playdate.kButtonA) then
+            setUp()
+        end
+
+        framesSinceDeath = framesSinceDeath + 1
         return
     end
 
     if framesSinceSpawn == spawnSpeed or next(enemies) == nil then
         local square = emptyBorderSquare(grid)
-        print("Spawning enemy on frame ", framesSinceSpawn, " at ", square.x, square.y)
+        print("Spawning enemy on frame ", frameCount, " at ", square.x, square.y)
         enemies[frameCount] = Body(square.x, square.y, 0.125, 21, playdate.kButtonRight, 1, enemyImage)
         framesSinceSpawn = 0
 
@@ -333,7 +345,7 @@ function playdate.update()
         for key, enemy in pairs(enemies) do
             hit = didHit(bullet.x, bullet.y, width, height, enemy.x, enemy.y, 1, 1)
             if hit ~= 0.0 then
-                kill(grid, graph, enemy)
+                setSelectedSquare(grid, graph, round(enemy.x), round(enemy.y))
                 bullet = nil
                 enemies[key] = nil
                 score = score + 1
@@ -346,7 +358,10 @@ function playdate.update()
         end
     end
 
-    endNode = graph:nodeWithXY(round(player.x), round(player.y))
+    if leapCooldown <= 20 then
+        endNode = graph:nodeWithXY(round(player.x), round(player.y))
+    end
+
     for key, enemy in pairs(enemies) do
         enemyNode = graph:nodeWithXY(round(enemy.x), round(enemy.y))
         path = graph:findPath(enemyNode, endNode, heuristicFunction)
@@ -363,12 +378,14 @@ function playdate.update()
                     enemy.y = enemy.y - enemy.speed
                 end
             else
-                gameOver = true
+                hit = didHit(player.x, player.y, 1, 1, enemy.x, enemy.y, 1, 1)
+                if hit ~= 0.0 then
+                    gameOver = true
+                end
             end
         end
     end
 
-    drawGrid(grid)
     if false then
         drawGridLines(grid)
     end
@@ -377,5 +394,6 @@ function playdate.update()
     for key, enemy in pairs(enemies) do
         drawBody(enemy)
     end
+    drawGrid(grid)
     playdate.drawFPS()
 end
