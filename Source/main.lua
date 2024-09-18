@@ -224,6 +224,7 @@ local playerDownImage = gfx.image.new("Images/playerDown"):scaledImage(1 / 20, 1
 local spawnSpeed = 30
 local framesSinceSpawn = 0
 local framesSinceDeath = 0
+local framesTillPathFind = 0
 local frameCount = 0
 local score = 0
 local lastButton = 0
@@ -240,6 +241,7 @@ local function setUp()
     spawnSpeed = 30
     framesSinceSpawn = 0
     framesSinceDeath = 0
+    framesTillPathFind = 1
     frameCount = 0
     score = 0
     lastButton = 0
@@ -269,7 +271,6 @@ function playdate.update()
 
     if framesSinceSpawn == spawnSpeed or next(enemies) == nil then
         local square = emptyBorderSquare(grid)
-        print("Spawning enemy on frame ", frameCount, " at ", square.x, square.y)
         enemies[frameCount] = Body(square.x, square.y, 0.125, 21, playdate.kButtonRight, 1, enemyImage)
         framesSinceSpawn = 0
 
@@ -277,7 +278,9 @@ function playdate.update()
             spawnSpeed = spawnSpeed - 1
         end
     end
+
     framesSinceSpawn = framesSinceSpawn + 1
+    framesTillPathFind = framesTillPathFind - 1
     frameCount = frameCount + 1
     if leapCooldown > 0 then
         leapCooldown = leapCooldown - 1
@@ -349,6 +352,7 @@ function playdate.update()
                 bullet = nil
                 enemies[key] = nil
                 score = score + 1
+                framesTillPathFind = 0
                 break
             end
         end
@@ -363,27 +367,47 @@ function playdate.update()
     end
 
     for key, enemy in pairs(enemies) do
-        enemyNode = graph:nodeWithXY(round(enemy.x), round(enemy.y))
-        path = graph:findPath(enemyNode, endNode, heuristicFunction)
-        if path ~= nil then
-            local n = path[2]
-            if n ~= nil then
-                if n.x > enemy.x then
+        if framesTillPathFind == 0 or enemy.path == nil or enemy.path[4] == nil or enemy.path[enemy.next] == nil then
+            local enemyNode = graph:nodeWithXY(round(enemy.x), round(enemy.y))
+            enemy.path = graph:findPath(enemyNode, endNode, heuristicFunction)
+            enemy.next = 2
+        end
+
+        if enemy.path ~= nil then
+            local next = enemy.path[enemy.next]
+            if next ~= nil then
+                if next.x > enemy.x then
                     enemy.x = enemy.x + enemy.speed
-                elseif n.x < enemy.x then
+                    if enemy.x == next.x then
+                        enemy.next = enemy.next + 1
+                    end
+                elseif next.x < enemy.x then
                     enemy.x = enemy.x - enemy.speed
-                elseif n.y > enemy.y then
+                    if enemy.x == next.x then
+                        enemy.next = enemy.next + 1
+                    end
+                elseif next.y > enemy.y then
                     enemy.y = enemy.y + enemy.speed
-                elseif n.y < enemy.y then
+                    if enemy.y == next.y then
+                        enemy.next = enemy.next + 1
+                    end
+                elseif next.y < enemy.y then
                     enemy.y = enemy.y - enemy.speed
-                end
-            else
-                hit = didHit(player.x, player.y, 1, 1, enemy.x, enemy.y, 1, 1)
-                if hit ~= 0.0 then
-                    gameOver = true
+                    if enemy.y == next.y then
+                        enemy.next = enemy.next + 1
+                    end
                 end
             end
         end
+
+        local hit = didHit(player.x, player.y, 1, 1, enemy.x, enemy.y, 1, 1)
+        if hit ~= 0.0 then
+            gameOver = true
+        end
+    end
+
+    if framesTillPathFind == 0 then
+        framesTillPathFind = 16
     end
 
     if false then

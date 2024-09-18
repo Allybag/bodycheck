@@ -1,0 +1,6 @@
+name=Body Check
+author=Alex Abboud
+description=Shoot the ninjas but don't get blocked in by their bodies!
+bundleID=org.allybag.bodycheck
+version=0.2
+buildNumber=2
